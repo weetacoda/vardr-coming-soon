@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vardr — Because what's missing, matters.</title>
+  <meta name="description" content="Vardr is an early warning system for digital silence. We track what fades—so you're first to act.">
+  <meta property="og:title" content="Vardr — Early warning from silence">
+  <meta property="og:description" content="Track digital silence. Catch absence before it's too late.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://vardr.ai/og.jpg">
+  <meta name="theme-color" content="#0E1114">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="container">
+    <header class="header" role="banner">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="Vardr logo">
+        <span class="badge">Private Alpha</span>
+      </div>
+      <nav aria-label="secondary">
+        <span class="badge" title="Email us">contact@vardr.ai</span>
+      </nav>
+    </header>
+
+    <main id="main" class="hero" role="main">
+      <section>
+        <p class="kicker">INTELLIGENCE FROM SILENCE</p>
+        <h1>Because what's missing, matters.</h1>
+        <p class="sub">Vardr is an early-warning platform that tracks the <em>absence</em> of digital signals—mentions, posts, and updates—so you catch risk and opportunity before anyone else.</p>
+
+        <div class="card">
+          <form class="form" method="post" action="https://formspree.io/f/your-id">
+            <input type="email" name="email" placeholder="Enter your email for early access" required aria-label="Email address">
+            <button type="submit">Get Early Access</button>
+          </form>
+          <p class="note">No spam. Just a single invite when we're ready.</p>
+        </div>
+
+        <div class="feature-list" aria-label="Highlights">
+          <div class="feature"><div class="dot"></div><div><strong>Reverse monitoring</strong><br><span class="muted">Alerts when things go quiet—not loud.</span></div></div>
+          <div class="feature"><div class="dot"></div><div><strong>Silence trackers</strong><br><span class="muted">Define entities to watch across the web.</span></div></div>
+          <div class="feature"><div class="dot"></div><div><strong>Early signals</strong><br><span class="muted">See decay trends and act in time.</span></div></div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="panel" aria-hidden="true"></div>
+      </aside>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div>© <span id="year"></span> Vardr · Built in the UK</div>
+      <div><a href="mailto:contact@vardr.ai">contact@vardr.ai</a></div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

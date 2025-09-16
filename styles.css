@@ -1,0 +1,103 @@
+
+/* Vardr Coming Soon - Noir Intelligence theme */
+:root{
+  --bg:#0E1114;            /* deep charcoal */
+  --panel:#14181D;         /* slate panel */
+  --ink:#E6EDF3;           /* off-white text */
+  --muted:#98A2B3;         /* cool grey */
+  --accent1:#C4F0FF;       /* electric ice */
+  --accent2:#7AE0FF;       /* cyan signal */
+  --accent3:#E07A5F;       /* soft coral (warn) */
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  color:var(--ink);
+  background: radial-gradient(1200px 800px at 80% -20%, #16202A 0%, transparent 60%),
+              radial-gradient(1000px 700px at -10% 120%, #0B2530 0%, transparent 60%),
+              var(--bg);
+  overflow-x:hidden;
+}
+
+/* Subtle animated grid */
+.bg-grid{
+  position:fixed; inset:0; pointer-events:none; opacity:.15;
+  background-image: linear-gradient(transparent 95%, rgba(196,240,255,.15) 95%),
+                    linear-gradient(90deg, transparent 95%, rgba(196,240,255,.12) 95%);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(80% 60% at 50% 40%, #000 60%, transparent 100%);
+  animation: drift 18s linear infinite;
+}
+@keyframes drift{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-32px)}
+}
+
+.container{max-width:1080px; margin:0 auto; padding:24px}
+.header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:36px; width:auto}
+.badge{
+  font-size:12px; padding:6px 10px; border:1px solid rgba(196,240,255,.25);
+  border-radius:999px; color:var(--muted); background:rgba(20,24,29,.5); backdrop-filter: blur(6px);
+}
+.hero{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding:80px 0 40px}
+@media (max-width:900px){ .hero{grid-template-columns:1fr; padding:48px 0 0} }
+
+.kicker{color:var(--accent1); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:12px}
+h1{font-size:56px; line-height:1.05; margin:.2em 0 .4em; letter-spacing:-.02em}
+@media (max-width:900px){ h1{font-size:38px} }
+.sub{color:var(--muted); font-size:18px; line-height:1.6}
+
+.card{
+  background: linear-gradient(180deg, rgba(20,24,29,.8), rgba(14,17,20,.8));
+  border:1px solid rgba(196,240,255,.12);
+  border-radius:16px; padding:24px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.form{display:flex; gap:12px; margin-top:20px}
+.form input{
+  flex:1; padding:14px 16px; border-radius:12px; border:1px solid rgba(196,240,255,.18);
+  background:#0B0F12; color:var(--ink); outline:none;
+}
+.form input::placeholder{color:#74808F}
+.form button{
+  padding:14px 18px; border-radius:12px; border:1px solid rgba(196,240,255,.3);
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color:#0A0D0F; font-weight:700; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease;
+  box-shadow: 0 8px 20px rgba(122,224,255,.25);
+}
+.form button:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(122,224,255,.35); }
+.note{font-size:12px; color:#8A97A6; margin-top:10px}
+
+.panel{
+  aspect-ratio: 16/10;
+  min-height: 280px;
+  border-radius:16px; position:relative; overflow:hidden;
+  border:1px solid rgba(196,240,255,.15);
+  background: radial-gradient(800px 300px at 10% 0%, rgba(122,224,255,.12), transparent 60%),
+              radial-gradient(800px 300px at 90% 100%, rgba(196,240,255,.1), transparent 60%),
+              linear-gradient(180deg, #0C1117, #0A0E12);
+}
+.panel:before{
+  content:""; position:absolute; inset:-40%; background:
+    conic-gradient(from 0deg, rgba(122,224,255,.06), transparent 40%, rgba(196,240,255,.06) 60%, transparent 80%);
+  animation: spin 28s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg);} }
+
+.feature-list{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px}
+@media (max-width:900px){ .feature-list{grid-template-columns:1fr} }
+.feature{display:flex; gap:12px; align-items:flex-start}
+.feature .dot{width:8px; height:8px; border-radius:50%; margin-top:8px; background:var(--accent2); box-shadow:0 0 22px rgba(122,224,255,.6)}
+
+.footer{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:32px 0; color:#8A97A6; font-size:13px}
+.footer a{color:var(--accent1); text-decoration:none; border-bottom:1px dashed rgba(196,240,255,.3)}
+.footer a:hover{border-bottom-color:rgba(196,240,255,.6)}
+
+/* Accessibility helpers */
+.skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+.skip:focus{left:12px; top:12px; width:auto; height:auto; padding:10px 12px; background:#000; color:#fff; border-radius:8px}
