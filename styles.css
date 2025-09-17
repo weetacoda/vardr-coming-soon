@@ -83,7 +83,7 @@ h1{font-size:56px; line-height:1.05; margin:.2em 0 .4em; letter-spacing:-.02em}
 
 .panel{
   aspect-ratio: 16/10;
-  min-height: 280px;
+  width:100%;
   border-radius:16px; position:relative; overflow:hidden;
   border:1px solid rgba(196,240,255,.15);
   background: radial-gradient(800px 300px at 10% 0%, rgba(122,224,255,.12), transparent 60%),
