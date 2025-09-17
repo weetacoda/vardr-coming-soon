@@ -37,7 +37,7 @@ body{
 }
 
 .container{max-width:1080px; margin:0 auto; padding:0 24px}
-.header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+.header{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
 .brand{display:flex; align-items:center; gap:12px}
 .brand img{height:36px; width:auto}
 .badge{
@@ -45,7 +45,14 @@ body{
   border-radius:999px; color:var(--muted); background:rgba(20,24,29,.5); backdrop-filter: blur(6px);
 }
 .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding:80px 0 40px}
+.hero > section,
+.hero > aside{min-width:0}
 @media (max-width:900px){ .hero{grid-template-columns:1fr; padding:48px 0 0} }
+@media (max-width:600px){
+  .header{flex-direction:column; align-items:flex-start}
+  .form{flex-direction:column}
+  .form button{width:100%}
+}
 
 .kicker{color:var(--accent1); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:12px}
 h1{font-size:56px; line-height:1.05; margin:.2em 0 .4em; letter-spacing:-.02em}
@@ -58,10 +65,10 @@ h1{font-size:56px; line-height:1.05; margin:.2em 0 .4em; letter-spacing:-.02em}
   border-radius:16px; padding:24px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-.form{display:flex; gap:12px; margin-top:20px}
+.form{display:flex; gap:12px; margin-top:20px; flex-wrap:wrap}
 .form input{
   flex:1; padding:14px 16px; border-radius:12px; border:1px solid rgba(196,240,255,.18);
-  background:#0B0F12; color:var(--ink); outline:none;
+  background:#0B0F12; color:var(--ink); outline:none; min-width:0;
 }
 .form input::placeholder{color:#74808F}
 .form button{
@@ -70,6 +77,7 @@ h1{font-size:56px; line-height:1.05; margin:.2em 0 .4em; letter-spacing:-.02em}
   color:#0A0D0F; font-weight:700; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease;
   box-shadow: 0 8px 20px rgba(122,224,255,.25);
 }
+.form button{flex:0 1 auto}
 .form button:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(122,224,255,.35); }
 .note{font-size:12px; color:#8A97A6; margin-top:10px}
 
