@@ -36,7 +36,7 @@ body{
   100%{transform:translateY(-32px)}
 }
 
-.container{max-width:1080px; margin:0 auto; padding:24px}
+.container{max-width:1080px; margin:0 auto; padding:0 24px}
 .header{display:flex; align-items:center; justify-content:space-between; gap:16px}
 .brand{display:flex; align-items:center; gap:12px}
 .brand img{height:36px; width:auto}
