@@ -56,10 +56,14 @@
           <p class="audience-pill" aria-label="Audience tags">For creators · PMs · Marketers</p>
           <h1>Because what’s missing, matters.</h1>
           <p class="hero-sub">Vardr quietly tracks when attention fades—so creators and teams spot relevance drops and adoption gaps early.</p>
-          <form class="waitlist-form" method="post" action="https://formspree.io/f/your-id" novalidate>
+          <form id="waitlist-form" class="waitlist-form" method="post" novalidate>
             <div class="form-field">
-              <label class="sr-only" for="hero-email">Email address</label>
-              <input id="hero-email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+              <label class="sr-only" for="email">Email address</label>
+              <input id="email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+            </div>
+            <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+              <label class="sr-only" for="waitlist-website">Website</label>
+              <input id="waitlist-website" type="text" name="website" tabindex="-1" autocomplete="off">
             </div>
             <button type="submit">Get Early Access</button>
             <p class="form-error" aria-live="polite"></p>
@@ -250,10 +254,14 @@
             <p>We’ll invite you when the next cohort opens. No noise—just signal.</p>
             <p class="cta-note">Early access pricing is shared with every invite.</p>
           </div>
-          <form class="waitlist-form" method="post" action="https://formspree.io/f/your-id" novalidate>
+          <form class="waitlist-form" method="post" novalidate>
             <div class="form-field">
               <label class="sr-only" for="cta-email">Email address</label>
               <input id="cta-email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+            </div>
+            <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+              <label class="sr-only" for="cta-website">Website</label>
+              <input id="cta-website" type="text" name="website" tabindex="-1" autocomplete="off">
             </div>
             <button type="submit">Get Early Access</button>
             <p class="form-error" aria-live="polite"></p>
@@ -280,38 +288,66 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const forms = document.querySelectorAll('.waitlist-form');
-    forms.forEach((form) => {
-      const input = form.querySelector('input[type="email"]');
-      const error = form.querySelector('.form-error');
+    const SUPABASE_URL = 'https://your-supabase-project.supabase.co';
+    const ANON_KEY = 'your-anon-key';
 
-      form.addEventListener('submit', (event) => {
-        if (!input.value.trim()) {
-          event.preventDefault();
-          form.classList.add('has-error');
-          input.setAttribute('aria-invalid', 'true');
-          error.textContent = 'Please enter an email address.';
-          input.focus();
-        } else if (!input.validity.valid) {
-          event.preventDefault();
-          form.classList.add('has-error');
-          input.setAttribute('aria-invalid', 'true');
-          error.textContent = 'Please provide a valid email address.';
-          input.focus();
-        } else {
-          form.classList.remove('has-error');
-          input.removeAttribute('aria-invalid');
+    const forms = document.querySelectorAll('.waitlist-form');
+
+    forms.forEach((form) => {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const emailInput = form.querySelector('input[type="email"]');
+        const honeypotInput = form.querySelector('input[name="website"]');
+        const error = form.querySelector('.form-error');
+
+        if (error) {
           error.textContent = '';
         }
-      });
 
-      input.addEventListener('input', () => {
-        if (form.classList.contains('has-error')) {
-          if (input.value.trim() && input.validity.valid) {
-            form.classList.remove('has-error');
-            input.removeAttribute('aria-invalid');
-            error.textContent = '';
+        if (honeypotInput && honeypotInput.value) {
+          return;
+        }
+
+        if (!emailInput || !emailInput.value.trim()) {
+          alert('Please enter an email address.');
+          if (emailInput) {
+            emailInput.focus();
           }
+          return;
+        }
+
+        if (!emailInput.checkValidity()) {
+          alert('Please provide a valid email address.');
+          emailInput.focus();
+          return;
+        }
+
+        try {
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: ANON_KEY,
+              Authorization: `Bearer ${ANON_KEY}`,
+              Prefer: 'return=representation',
+            },
+            body: JSON.stringify([
+              {
+                email: emailInput.value.trim(),
+              },
+            ]),
+          });
+
+          if (!response.ok) {
+            throw new Error(await response.text());
+          }
+
+          form.reset();
+          alert('Thanks — you’re on the waitlist!');
+        } catch (error) {
+          console.error(error);
+          alert('Sorry, something went wrong. Please try again later.');
         }
       });
     });
