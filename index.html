@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Vardr — Because what's missing, matters.</title>
-  <meta name="description" content="Vardr quietly tracks when attention fades so creators, product teams, and marketers can spot relevance drops and adoption gaps early.">
+  <meta name="description" content="Vardr quietly tracks when attention fades so creators, product teams, and marketers can catch relevance drops and adoption gaps early.">
   <meta property="og:title" content="Vardr — Because what's missing, matters.">
   <meta property="og:description" content="Vardr quietly tracks when attention fades so you can act before the silence sticks.">
   <meta property="og:type" content="website">
@@ -14,7 +14,7 @@
   <meta name="twitter:title" content="Vardr — Because what's missing, matters.">
   <meta name="twitter:description" content="Creators, PMs, and marketers use Vardr to notice when relevance and adoption slip.">
   <meta name="twitter:image" content="https://vardr.ai/og.jpg">
-  <meta name="theme-color" content="#f7fbff">
+  <meta name="theme-color" content="#f5f7ff">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,16 +22,27 @@
   <a href="#main" class="skip">Skip to content</a>
 
   <header class="site-header" role="banner">
-    <div class="container header-content">
-      <a class="logo" href="#">
-        <img src="assets/logo.svg" alt="Vardr logo">
-        <span class="sr-only">Vardr</span>
+    <div class="container header-bar">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <linearGradient id="markGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#50d1e6" />
+                <stop offset="65%" stop-color="#6c8bff" />
+                <stop offset="100%" stop-color="#f78b7f" />
+              </linearGradient>
+            </defs>
+            <circle cx="24" cy="24" r="20" fill="none" stroke="url(#markGradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="140 80" />
+          </svg>
+        </span>
+        <span class="brand-word">Vardr</span>
       </a>
       <nav aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="#how">How it Works</a></li>
           <li><a href="#use-cases">Use Cases</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#waitlist">Pricing</a></li>
           <li><a href="#login">Log in</a></li>
         </ul>
       </nav>
@@ -39,132 +50,310 @@
   </header>
 
   <main id="main">
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="hero-badge" aria-label="Audience tags">For creators · PMs · Marketers</p>
+          <p class="audience-pill" aria-label="Audience tags">For creators · PMs · Marketers</p>
           <h1>Because what’s missing, matters.</h1>
           <p class="hero-sub">Vardr quietly tracks when attention fades—so creators and teams spot relevance drops and adoption gaps early.</p>
-
-          <form class="email-form" method="post" action="https://formspree.io/f/your-id">
-            <label class="sr-only" for="email">Email address</label>
-            <input id="email" type="email" name="email" placeholder="Enter your email" required>
+          <form class="waitlist-form" method="post" action="https://formspree.io/f/your-id" novalidate>
+            <div class="form-field">
+              <label class="sr-only" for="hero-email">Email address</label>
+              <input id="hero-email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+            </div>
             <button type="submit">Get Early Access</button>
+            <p class="form-error" aria-live="polite"></p>
           </form>
+          <p class="hero-footnote">Reverse monitoring · Silence trackers · Early signals.</p>
         </div>
-        <div class="hero-panel" aria-hidden="true">
-          <div class="panel-card">
-            <p class="panel-label">Live signal health</p>
-            <ul>
-              <li>
-                <span>Mentions</span>
-                <strong class="up">+12%</strong>
-              </li>
-              <li>
-                <span>Launch replies</span>
-                <strong class="steady">steady</strong>
-              </li>
-              <li>
-                <span>Community posts</span>
-                <strong class="down">−28%</strong>
-              </li>
-            </ul>
-            <p class="panel-note">Silence threshold next check in 2h</p>
-          </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-glow"></div>
+          <svg class="hero-discs" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <radialGradient id="discOuter" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#cfe9ff" stop-opacity="0.8" />
+                <stop offset="70%" stop-color="#dfe5ff" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="discMiddle" x1="15%" y1="0%" x2="85%" y2="100%">
+                <stop offset="0%" stop-color="#bee7ff" stop-opacity="0.8" />
+                <stop offset="50%" stop-color="#cdd9ff" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#ffd0c4" stop-opacity="0.5" />
+              </linearGradient>
+              <linearGradient id="discInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a2dfff" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#d3caff" stop-opacity="0.7" />
+              </linearGradient>
+            </defs>
+            <circle cx="160" cy="160" r="150" fill="url(#discOuter)" />
+            <circle cx="160" cy="160" r="110" fill="url(#discMiddle)" />
+            <circle cx="160" cy="160" r="70" fill="url(#discInner)" opacity="0.85" />
+          </svg>
+          <svg class="hero-wave" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M10 110 C70 60 140 150 210 100 C250 70 280 70 310 90" stroke="#21c1d6" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.9"/>
+          </svg>
+          <svg class="hero-character" viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <linearGradient id="shirt" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffad90" />
+                <stop offset="100%" stop-color="#ff7b6d" />
+              </linearGradient>
+              <linearGradient id="skin" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffe1cc" />
+                <stop offset="100%" stop-color="#ffd0b3" />
+              </linearGradient>
+            </defs>
+            <path d="M80 200 C90 150 130 150 140 200 Z" fill="url(#shirt)" />
+            <path d="M60 200 C70 150 150 150 160 200 C160 210 150 220 110 220 C70 220 60 210 60 200 Z" fill="url(#shirt)" opacity="0.9" />
+            <path d="M110 60 C130 60 146 78 146 104 C146 130 132 150 110 150 C88 150 74 130 74 104 C74 78 90 60 110 60 Z" fill="url(#skin)" />
+            <path d="M92 108 C98 116 122 116 128 108" stroke="#1e2a3c" stroke-width="4" stroke-linecap="round" fill="none" />
+            <circle cx="98" cy="98" r="5" fill="#1e2a3c" />
+            <circle cx="122" cy="98" r="5" fill="#1e2a3c" />
+            <path d="M70 96 C70 70 92 50 118 52 C140 54 160 74 158 100 C154 88 142 76 124 76 C108 76 94 84 86 96 Z" fill="#1c2738" />
+            <path d="M72 166 C84 148 134 148 146 166" stroke="#f9b9a0" stroke-width="10" stroke-linecap="round" fill="none" />
+          </svg>
         </div>
+      </div>
+      <div class="wave wave-bottom wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
       </div>
     </section>
 
-    <section class="value" aria-labelledby="value-heading">
+    <section class="features" id="features">
+      <div class="wave wave-top wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
       <div class="container">
-        <h2 id="value-heading">Why teams keep Vardr close</h2>
-        <div class="value-grid">
-          <article class="value-card">
-            <h3>Relevance Radar</h3>
-            <p>See when your mentions slow down.</p>
+        <div class="section-intro">
+          <h2>Track the silence before it sticks.</h2>
+          <p>Vardr watches for quiet signals across the feeds and forums you care about.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="icon-medallion icon--reverse" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="24" cy="24" r="20" fill="none" stroke="#24c3d8" stroke-width="2.5" stroke-dasharray="8 6" stroke-linecap="round" />
+                <path d="M18 16 L30 16" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M16 30 C20 26 28 26 32 30" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M24 12 L24 10" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M24 34 L24 38" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M19 21 L19 25" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M29 21 L29 25" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <div>
+              <h3>Reverse monitoring</h3>
+              <p>Alerts when things go quiet—not loud.</p>
+            </div>
           </article>
-          <article class="value-card">
-            <h3>Adoption Watch</h3>
-            <p>Know if launches stall after the hype.</p>
+          <article class="feature-card">
+            <span class="icon-medallion icon--silence" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="24" cy="24" r="12" fill="none" stroke="#7e7bdf" stroke-width="2.5" />
+                <circle cx="24" cy="24" r="20" fill="none" stroke="#7e7bdf" stroke-width="2.5" stroke-dasharray="10 6" stroke-linecap="round" opacity="0.6" />
+                <path d="M18 30 L30 18" stroke="#7e7bdf" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="24" cy="24" r="3" fill="#7e7bdf" />
+              </svg>
+            </span>
+            <div>
+              <h3>Silence trackers</h3>
+              <p>Define entities to watch across the web.</p>
+            </div>
           </article>
-          <article class="value-card">
-            <h3>Quiet Alerts</h3>
-            <p>Get notified when the conversation goes silent.</p>
+          <article class="feature-card">
+            <span class="icon-medallion icon--signals" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <polyline points="14 30 20 24 26 28 34 18" fill="none" stroke="#f67656" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="34" cy="18" r="3" fill="#f67656" />
+                <circle cx="24" cy="12" r="20" fill="none" stroke="#f67656" stroke-width="2.5" stroke-dasharray="12 8" stroke-linecap="round" opacity="0.6" />
+              </svg>
+            </span>
+            <div>
+              <h3>Early signals</h3>
+              <p>See decay trends and act in time.</p>
+            </div>
           </article>
         </div>
       </div>
+      <div class="wave wave-bottom wave-soft" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
     </section>
 
-    <section id="use-cases" class="use-cases" aria-labelledby="use-cases-heading">
+    <section class="use-cases" id="use-cases">
+      <div class="wave wave-top wave-soft" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
       <div class="container">
-        <h2 id="use-cases-heading">Use cases</h2>
+        <div class="section-intro">
+          <h2>Where silence hurts first.</h2>
+          <p>Creators, product teams, and brands get an early whisper when their signals slip.</p>
+        </div>
         <div class="case-grid">
           <article class="case-card">
-            <h3>Creator</h3>
-            <p>Track when your name stops trending so you can revive the conversation before algorithms bury it.</p>
+            <span class="icon-medallion icon--reverse" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="24" cy="24" r="20" fill="none" stroke="#24c3d8" stroke-width="2.5" stroke-dasharray="10 8" stroke-linecap="round" opacity="0.5" />
+                <path d="M16 30 L32 18" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M20 18 L28 30" stroke="#24c3d8" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3>Creators</h3>
+            <p>Track your handle’s presence across platforms and catch fades early.</p>
           </article>
           <article class="case-card">
-            <h3>Product</h3>
-            <p>Spot adoption gaps as customer chatter slows so product teams can course-correct fast.</p>
+            <span class="icon-medallion icon--silence" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="24" cy="24" r="16" fill="none" stroke="#7e7bdf" stroke-width="2.5" />
+                <path d="M16 28 C20 24 28 24 32 28" stroke="#7e7bdf" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M20 20 L28 20" stroke="#7e7bdf" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3>Product Teams</h3>
+            <p>Monitor post-launch adoption and spot stalls after the hype.</p>
           </article>
           <article class="case-card">
-            <h3>Brand</h3>
-            <p>Watch campaign silence in real time and keep marketing spend aligned with active attention.</p>
+            <span class="icon-medallion icon--signals" aria-hidden="true">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <polyline points="14 30 20 22 26 24 34 16" fill="none" stroke="#f67656" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="34" cy="16" r="3" fill="#f67656" />
+                <path d="M12 16 C18 8 30 8 36 16" stroke="#f67656" stroke-width="2.5" stroke-linecap="round" opacity="0.5" />
+              </svg>
+            </span>
+            <h3>Brands</h3>
+            <p>Watch competitor buzz fade or rise to guide spend and strategy.</p>
           </article>
         </div>
       </div>
+      <div class="wave wave-bottom wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
     </section>
 
-    <section id="how" class="how" aria-labelledby="how-heading">
+    <section class="how" id="how">
+      <div class="wave wave-top wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
       <div class="container">
-        <h2 id="how-heading">How it works</h2>
+        <div class="section-intro">
+          <h2>How Vardr keeps quiet on your radar.</h2>
+          <p>Set your silence thresholds once, then let the alerts roll in only when it matters.</p>
+        </div>
         <ol class="how-steps">
           <li>
-            <span class="step-title">Pick targets</span>
-            <p>Select the people, products, or launches to watch.</p>
+            <span class="step-badge">1</span>
+            <h3>Pick targets</h3>
+            <p>Choose the names, handles, or products you care about.</p>
           </li>
           <li>
-            <span class="step-title">Set silence rules</span>
-            <p>Define the lull that signals you need to jump back in.</p>
+            <span class="step-badge">2</span>
+            <h3>Set silence rules</h3>
+            <p>Define what ‘quiet’ means: time windows, channels, or thresholds.</p>
           </li>
           <li>
-            <span class="step-title">Get alerts</span>
-            <p>Receive gentle nudges when the conversation fades.</p>
+            <span class="step-badge">3</span>
+            <h3>Get alerts</h3>
+            <p>Receive summaries and deltas when attention dips below your line.</p>
           </li>
         </ol>
       </div>
+      <div class="wave wave-bottom wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
     </section>
 
-    <section id="pricing" class="cta" aria-labelledby="cta-heading">
+    <section class="cta" id="waitlist">
+      <div class="wave wave-top wave-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C240 80 480 80 720 40 C960 0 1200 0 1440 40 L1440 120 L0 120 Z" />
+        </svg>
+      </div>
       <div class="container">
-        <div class="cta-content">
-          <div>
-            <p class="cta-kicker">Join the waitlist</p>
-            <h2 id="cta-heading">Stay ahead of the silence.</h2>
-            <p>We’ll invite you the moment the next cohort opens. No noise—just signal.</p>
+        <div class="cta-panel">
+          <div class="cta-copy">
+            <h2>Join the waitlist</h2>
+            <p>We’ll invite you when the next cohort opens. No noise—just signal.</p>
+            <p class="cta-note">Early access pricing is shared with every invite.</p>
           </div>
-          <a class="cta-button" href="#email">Get Early Access</a>
+          <form class="waitlist-form" method="post" action="https://formspree.io/f/your-id" novalidate>
+            <div class="form-field">
+              <label class="sr-only" for="cta-email">Email address</label>
+              <input id="cta-email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+            </div>
+            <button type="submit">Get Early Access</button>
+            <p class="form-error" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <div class="container footer-grid">
-      <div>
-        <p>© <span id="year"></span> Vardr. All rights reserved.</p>
-      </div>
-      <div class="footer-links">
-        <a href="mailto:contact@vardr.ai">contact@vardr.ai</a>
-        <a href="#use-cases">Use Cases</a>
-        <a href="#how">How it Works</a>
-        <a id="login" href="#">Log in</a>
-      </div>
+    <div class="container footer-bar">
+      <p>© <span id="year"></span> Vardr.</p>
+      <nav aria-label="Footer links">
+        <ul class="footer-links">
+          <li><a href="mailto:contact@vardr.ai">contact@vardr.ai</a></li>
+          <li><a href="#use-cases">Use Cases</a></li>
+          <li><a href="#how">How it Works</a></li>
+          <li><a id="login" href="#waitlist">Log in</a></li>
+        </ul>
+      </nav>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const forms = document.querySelectorAll('.waitlist-form');
+    forms.forEach((form) => {
+      const input = form.querySelector('input[type="email"]');
+      const error = form.querySelector('.form-error');
+
+      form.addEventListener('submit', (event) => {
+        if (!input.value.trim()) {
+          event.preventDefault();
+          form.classList.add('has-error');
+          input.setAttribute('aria-invalid', 'true');
+          error.textContent = 'Please enter an email address.';
+          input.focus();
+        } else if (!input.validity.valid) {
+          event.preventDefault();
+          form.classList.add('has-error');
+          input.setAttribute('aria-invalid', 'true');
+          error.textContent = 'Please provide a valid email address.';
+          input.focus();
+        } else {
+          form.classList.remove('has-error');
+          input.removeAttribute('aria-invalid');
+          error.textContent = '';
+        }
+      });
+
+      input.addEventListener('input', () => {
+        if (form.classList.contains('has-error')) {
+          if (input.value.trim() && input.validity.valid) {
+            form.classList.remove('has-error');
+            input.removeAttribute('aria-invalid');
+            error.textContent = '';
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
