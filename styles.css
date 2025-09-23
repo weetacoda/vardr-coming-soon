@@ -10,6 +10,8 @@
   --success: #3da277;
   --warning: #e68b2f;
   --shadow: rgba(79, 101, 255, 0.18);
+  --container-max: 1080px;
+  --container-gutter: clamp(20px, 5vw, 48px);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -29,9 +31,10 @@ img { max-width: 100%; display: block; }
 a { color: inherit; }
 
 .container {
-  width: min(1080px, 100%);
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--container-gutter) * 2);
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 48px);
+  padding-inline: var(--container-gutter);
 }
 
 .skip {
@@ -62,14 +65,23 @@ a { color: inherit; }
   top: 0;
   z-index: 10;
   border-bottom: 1px solid rgba(77, 107, 255, 0.1);
+  padding-inline: var(--container-gutter);
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   padding: 18px 0;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.header-content nav {
+  margin-left: auto;
 }
 
 .logo img {
@@ -79,7 +91,7 @@ a { color: inherit; }
 
 .nav-list {
   display: flex;
-  gap: 20px;
+  gap: clamp(18px, 5vw, 40px);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -91,7 +103,8 @@ a { color: inherit; }
   text-decoration: none;
   color: var(--muted);
   position: relative;
-  padding: 6px 0;
+  padding: 12px 16px;
+  border-radius: 999px;
 }
 
 .nav-list a::after {
@@ -170,7 +183,9 @@ main section {
   border-radius: 12px;
   border: 1px solid rgba(77, 107, 255, 0.25);
   background: #fff;
-  padding: 16px 18px;
+  padding: 12px 18px;
+  min-height: 48px;
+  line-height: 1.5;
   font-size: 16px;
   color: var(--ink);
   box-shadow: inset 0 1px 3px rgba(77, 107, 255, 0.08);
@@ -492,6 +507,10 @@ main section {
 
   .header-content {
     align-items: flex-start;
+  }
+
+  .header-content nav {
+    flex-basis: 100%;
   }
 
   .cta-content {
