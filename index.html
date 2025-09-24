@@ -324,13 +324,13 @@
         }
 
         try {
-          const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist?on_conflict=email`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               apikey: ANON_KEY,
               Authorization: `Bearer ${ANON_KEY}`,
-              Prefer: 'return=representation',
+              Prefer: 'resolution=merge-duplicates, return=representation',
             },
             body: JSON.stringify([
               {
@@ -340,6 +340,10 @@
           });
 
           if (!response.ok) {
+            const txt = await response.text(),
+              console.log('FAIL', response.status,txt);
+            alert('Error ' + response.status + ': ' + txt;
+            return;
             throw new Error(await response.text());
           }
 
