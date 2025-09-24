@@ -286,12 +286,23 @@ main section {
   box-shadow: 0 22px 44px rgba(45, 165, 189, 0.3);
 }
 
+
 .waitlist-form .form-error {
   grid-column: 1 / -1;
   margin: 0;
   font-size: 13px;
   color: #d6455d;
   min-height: 18px;
+  transition: color 0.2s ease;
+}
+
+.waitlist-form .form-error[data-variant="success"] {
+  color: #14805c;
+}
+
+.waitlist-form .form-error[data-variant="info"],
+.waitlist-form .form-error[data-variant=""] {
+  color: var(--muted);
 }
 
 .waitlist-form.has-error input {

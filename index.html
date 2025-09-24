@@ -5,18 +5,69 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Vardr — Because what's missing, matters.</title>
   <meta name="description" content="Vardr quietly tracks when attention fades so creators, product teams, and marketers can act on silent churn and hidden adoption gaps before they spread.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://vardr.ai/">
+  <link rel="alternate" href="https://vardr.ai/" hreflang="en-GB">
+  <link rel="alternate" href="https://vardr.ai/" hreflang="x-default">
   <meta property="og:title" content="Vardr — Because what's missing, matters.">
   <meta property="og:description" content="Vardr quietly tracks when attention fades so you can act before the silence sticks.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vardr.ai/">
+  <meta property="og:site_name" content="Vardr">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:image" content="https://vardr.ai/og.jpg">
+  <meta property="og:image:alt" content="Abstract visualization of Vardr's silence tracking interface.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vardr — Because what's missing, matters.">
   <meta name="twitter:description" content="Creators, PMs, and marketers use Vardr to notice when relevance and adoption slip.">
   <meta name="twitter:image" content="https://vardr.ai/og.jpg">
+  <meta name="twitter:image:alt" content="Abstract visualization of Vardr's silence tracking interface.">
+  <meta name="twitter:site" content="@vardr">
+  <meta name="twitter:creator" content="@vardr">
   <meta name="theme-color" content="#f5f7ff">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://tvkgbujmcoctnnqsolxr.supabase.co" crossorigin>
+  <link rel="dns-prefetch" href="https://tvkgbujmcoctnnqsolxr.supabase.co">
+  <link rel="preload" as="image" href="assets/BCB9D072-55F8-4797-BAA9-396962AFA59B.PNG" imagesrcset="assets/BCB9D072-55F8-4797-BAA9-396962AFA59B.PNG" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://vardr.ai/#website",
+          "url": "https://vardr.ai/",
+          "name": "Vardr",
+          "description": "Vardr quietly tracks when attention fades so teams can respond before churn spreads.",
+          "publisher": { "@id": "https://vardr.ai/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://vardr.ai/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://vardr.ai/#organization",
+          "name": "Vardr",
+          "url": "https://vardr.ai/",
+          "logo": "https://vardr.ai/assets/logo.svg",
+          "sameAs": [
+            "https://www.linkedin.com/company/vardr",
+            "https://twitter.com/vardr"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "contact@vardr.ai"
+          }
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
   <a href="#main" class="skip">Skip to content</a>
@@ -72,9 +123,9 @@
           </form>
           <p class="hero-footnote">Reverse monitoring · Silence trackers · Early signals · Investor-grade reporting.</p>
         </div>
-        <div class="hero-art" aria-hidden="true">
+        <div class="hero-art">
           <div class="hero-portrait">
-            <img src="assets/BCB9D072-55F8-4797-BAA9-396962AFA59B.PNG"></img>
+            <img src="assets/BCB9D072-55F8-4797-BAA9-396962AFA59B.PNG" alt="Vardr dashboard showcasing silence tracking signals." width="1024" height="1536" fetchpriority="high">
           </div>
           <svg class="hero-wave" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" focusable="false">
             <path d="M10 110 C70 60 140 150 210 100 C250 70 280 70 310 90" stroke="#21c1d6" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.9"/>
@@ -291,65 +342,10 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script type="module" src="scripts/waitlist.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    const SUPABASE_URL = 'https://tvkgbujmcoctnnqsolxr.supabase.co';
-    const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2a2didWptY29jdG5ucXNvbHhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2NTU2ODAsImV4cCI6MjA3NDIzMTY4MH0.wqP6A1YTFWsMhKPea_z9M6hOXAvGNialHbLAKLg99ds';
-
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, ANON_KEY);
-
-    const forms = document.querySelectorAll('.waitlist-form');
-
-    forms.forEach((form) => {
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const emailInput = form.querySelector('input[type="email"]');
-        const honeypotInput = form.querySelector('input[name="website"]');
-        const error = form.querySelector('.form-error');
-
-        if (error) {
-          error.textContent = '';
-        }
-
-        if (honeypotInput && honeypotInput.value) {
-          return;
-        }
-
-        if (!emailInput || !emailInput.value.trim()) {
-          alert('Please enter an email address.');
-          if (emailInput) {
-            emailInput.focus();
-          }
-          return;
-        }
-
-        if (!emailInput.checkValidity()) {
-          alert('Please provide a valid email address.');
-          emailInput.focus();
-          return;
-        }
-
-        try {
-          const trimmedEmail = emailInput.value.trim();
-          const { error: supabaseError } = await supabaseClient
-            .from('waitlist')
-            .insert([{ email: trimmedEmail }], { ignoreDuplicates: true });
-
-          if (supabaseError) {
-            throw supabaseError;
-          }
-
-          form.reset();
-          alert('Thanks — you’re on the waitlist!');
-        } catch (error) {
-          console.error(error);
-          alert('Sorry, something went wrong. Please try again later.');
-        }
-      });
-    });
   </script>
 </body>
 </html>
