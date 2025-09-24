@@ -330,7 +330,7 @@
           const trimmedEmail = emailInput.value.trim();
           const { error: supabaseError } = await supabaseClient
             .from('waitlist')
-            .upsert([{ email: trimmedEmail }], { onConflict: 'email', ignoreDuplicates: true });
+            .upsert([{ email: trimmedEmail }], { ignoreDuplicates: true });
 
           if (supabaseError) {
             throw supabaseError;
