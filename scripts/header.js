@@ -20,11 +20,6 @@ const HEADER_STATE = {
   CONDENSED: 'condensed'
 };
 
-const ENTER_ZONE_MIN = 24;
-const ENTER_ZONE_FACTOR = 0.35;
-const EXIT_ZONE_MIN = 48;
-const EXIT_ZONE_FACTOR = 0.85;
-
 class CondensedHeaderController {
   constructor(header, pill, options = {}) {
     this.header = header;
@@ -358,14 +353,6 @@ class CondensedHeaderController {
     this.lastScrollPosition = position;
   }
 
-  getEnterZoneDistance(headerHeight) {
-    return Math.max(ENTER_ZONE_MIN, headerHeight * ENTER_ZONE_FACTOR);
-  }
-
-  getExitZoneDistance(headerHeight) {
-    return Math.max(EXIT_ZONE_MIN, headerHeight * EXIT_ZONE_FACTOR);
-  }
-
   scheduleMeasure() {
     if (this.rafId !== null) {
       return;
@@ -388,8 +375,7 @@ class CondensedHeaderController {
     const pillTop = pillRect.top;
     const delta = pillTop - headerBottom;
     const distance = Math.abs(delta);
-    const enterZone = this.getEnterZoneDistance(headerRect.height || 0);
-    const exitZone = this.getExitZoneDistance(headerRect.height || 0);
+    const shouldCondense = pillTop <= headerBottom;
 
     const metrics = {
       scrollY: window.scrollY,
@@ -400,11 +386,12 @@ class CondensedHeaderController {
       pillTop,
       delta,
       distance,
-      enterZone,
-      exitZone
+      enterZone: 0,
+      exitZone: 0,
+      shouldCondense
     };
 
-    this.currentZoneBounds = { enter: enterZone, exit: exitZone };
+    this.currentZoneBounds = null;
 
     const mediaMatches = this.mediaQuery ? this.mediaQuery.matches : true;
     let reason = '';
@@ -429,13 +416,11 @@ class CondensedHeaderController {
       return;
     }
 
-    if (!this.isCondensed) {
-      if (distance <= enterZone) {
-        reason = `enter (|Δ| ${Math.round(distance)} <= ${Math.round(enterZone)})`;
-        this.setCondensed(true, reason, metrics);
-      }
-    } else if (distance > exitZone) {
-      reason = `exit (|Δ| ${Math.round(distance)} > ${Math.round(exitZone)})`;
+    if (shouldCondense && !this.isCondensed) {
+      reason = 'threshold-enter';
+      this.setCondensed(true, reason, metrics);
+    } else if (!shouldCondense && this.isCondensed) {
+      reason = 'threshold-exit';
       this.setCondensed(false, reason, metrics);
     }
 
