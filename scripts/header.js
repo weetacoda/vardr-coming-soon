@@ -11,8 +11,7 @@ const drawerLinks = mobileDrawer?.querySelectorAll('a');
 const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const condenseMedia = window.matchMedia('(max-width: 768px)');
-let headerObserver;
-let isIntersectingHeader = false;
+let headerMetrics = { height: 0, bottom: 0 };
 let isHeaderCondensed = false;
 let lastScrollY = window.scrollY;
 let scrollDirection = 'down';
@@ -20,22 +19,16 @@ let drawerOpen = false;
 let lastFocusedElement = null;
 
 const refreshObserver = () => {
-  if (!siteHeader || !pillSection) {
+  if (!siteHeader) {
+    headerMetrics = { height: 0, bottom: 0 };
     return;
   }
 
-  if (headerObserver) {
-    headerObserver.disconnect();
-  }
-
-  const headerHeight = siteHeader.getBoundingClientRect().height;
-  headerObserver = new IntersectionObserver(handleIntersection, {
-    root: null,
-    threshold: 0,
-    rootMargin: `-${Math.ceil(headerHeight)}px 0px 0px 0px`
-  });
-
-  headerObserver.observe(pillSection);
+  const rect = siteHeader.getBoundingClientRect();
+  headerMetrics = {
+    height: rect.height,
+    bottom: rect.bottom
+  };
 };
 
 const setCondensed = (shouldCondense) => {
@@ -50,19 +43,9 @@ const setCondensed = (shouldCondense) => {
 
   isHeaderCondensed = targetState;
   siteHeader.classList.toggle('is-condensed', targetState);
+  refreshObserver();
   window.requestAnimationFrame(refreshObserver);
 };
-
-function handleIntersection(entries) {
-  entries.forEach((entry) => {
-    if (entry.target !== pillSection) {
-      return;
-    }
-
-    isIntersectingHeader = entry.isIntersecting;
-    evaluateCondensedState();
-  });
-}
 
 const evaluateCondensedState = () => {
   if (!siteHeader || !pillSection) {
@@ -79,13 +62,24 @@ const evaluateCondensedState = () => {
     return;
   }
 
-  if (scrollDirection === 'down') {
-    setCondensed(false);
+  if (!headerMetrics.height) {
+    refreshObserver();
+  }
+
+  const pillRect = pillSection.getBoundingClientRect();
+  const { bottom: headerBottom, height: headerHeight } = headerMetrics;
+  const enterBuffer = Math.max(12, headerHeight * 0.2);
+  const exitBuffer = Math.max(headerHeight, 32);
+
+  if (!isHeaderCondensed) {
+    if (scrollDirection === 'up' && pillRect.bottom >= headerBottom + enterBuffer) {
+      setCondensed(true);
+    }
     return;
   }
 
-  if (isIntersectingHeader && scrollDirection === 'up') {
-    setCondensed(true);
+  if (scrollDirection === 'down' && pillRect.bottom <= headerBottom - exitBuffer) {
+    setCondensed(false);
   }
 };
 
@@ -275,4 +269,13 @@ if (siteHeader && pillSection) {
   } else if (typeof condenseMedia.addListener === 'function') {
     condenseMedia.addListener(handleMediaChange);
   }
+
+  window.addEventListener(
+    'resize',
+    () => {
+      refreshObserver();
+      evaluateCondensedState();
+    },
+    { passive: true }
+  );
 }
