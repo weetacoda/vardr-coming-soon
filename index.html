@@ -72,7 +72,7 @@
 <body>
   <a href="#main" class="skip">Skip to content</a>
 
-  <header class="site-header" role="banner">
+  <header id="site-header" class="site-header" role="banner">
     <div class="container header-bar">
       <a class="brand" href="#top">
         <span class="brand-mark" aria-hidden="true">
@@ -89,23 +89,50 @@
         </span>
         <span class="brand-word">Vardr</span>
       </a>
-      <nav aria-label="Main navigation">
+      <nav class="primary-nav" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="#how">How it Works</a></li>
           <li><a href="#use-cases">Use Cases</a></li>
           <li><a href="#waitlist">Pricing</a></li>
-          <li><a href="#login">Log in</a></li>
           <li class="nav-cta"><a href="#waitlist">Get Early Access</a></li>
         </ul>
       </nav>
+      <button type="button" class="header-menu-toggle" aria-expanded="false" aria-controls="mobile-drawer">
+        <span class="sr-only header-menu-toggle__label">Open navigation</span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
     </div>
   </header>
+
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer__overlay" data-drawer-dismiss></div>
+    <div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="mobile-drawer-title" tabindex="-1">
+      <div class="mobile-drawer__inner">
+        <p id="mobile-drawer-title" class="sr-only">Main navigation</p>
+        <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Close navigation">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+            <path d="M6 6l12 12M18 6l-12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+        <nav aria-label="Mobile navigation">
+          <ul class="mobile-drawer__nav">
+            <li><a href="#how">How it Works</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#waitlist">Pricing</a></li>
+          </ul>
+        </nav>
+        <a class="mobile-drawer__cta" href="#waitlist">Get Early Access</a>
+      </div>
+    </div>
+  </div>
 
   <main id="main">
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="audience-pill" aria-label="Audience tags">For creators · PMs · Marketers</p>
+          <p id="audience-pill" class="audience-pill" aria-label="Audience tags">For creators · PMs · Marketers</p>
           <h1>Because what’s missing, matters.</h1>
           <p class="hero-sub">Vardr quietly tracks when attention fades—surfacing the drop-offs, missed mentions, and low-signal plateaus your dashboards never flag.</p>
           <p class="hero-sub">Our reverse monitoring engine assembles the context investors care about: velocity of decay, channels at risk, and the leading indicators that let teams course-correct with confidence.</p>
@@ -343,6 +370,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script type="module" src="scripts/header.js"></script>
   <script type="module" src="scripts/waitlist.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
