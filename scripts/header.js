@@ -20,6 +20,11 @@ const HEADER_STATE = {
   CONDENSED: 'condensed'
 };
 
+const ENTER_ZONE_MIN = 24;
+const ENTER_ZONE_FACTOR = 0.35;
+const EXIT_ZONE_MIN = 48;
+const EXIT_ZONE_FACTOR = 0.85;
+
 class CondensedHeaderController {
   constructor(header, pill, options = {}) {
     this.header = header;
@@ -42,10 +47,11 @@ class CondensedHeaderController {
       headerBottom: 0,
       pillTop: 0,
       delta: 0,
-      enterBuffer: 0,
-      exitBuffer: 0
+      distance: 0,
+      enterZone: 0,
+      exitZone: 0
     };
-    this.currentBuffers = { enter: 0, exit: 0 };
+    this.currentZoneBounds = { enter: 0, exit: 0 };
     this.rafId = null;
     this.mutationObserver = null;
     this.resizeObserver = null;
@@ -218,7 +224,8 @@ class CondensedHeaderController {
         <dt>Header ⬇︎</dt><dd data-debug-field="headerBottom">0</dd>
         <dt>Pill ⬆︎</dt><dd data-debug-field="pillTop">0</dd>
         <dt>Δ (pill-header)</dt><dd data-debug-field="delta">0</dd>
-        <dt>Buffers</dt><dd data-debug-field="buffers">0 / 0</dd>
+        <dt>|Δ| Distance</dt><dd data-debug-field="distance">0</dd>
+        <dt>Zone (enter/exit)</dt><dd data-debug-field="zones">0 / 0</dd>
         <dt>State</dt><dd data-debug-field="state">expanded</dd>
         <dt>Reason</dt><dd data-debug-field="reason">init</dd>
       </dl>
@@ -351,14 +358,12 @@ class CondensedHeaderController {
     this.lastScrollPosition = position;
   }
 
-  getEnterBuffer(headerHeight) {
-    const minBuffer = 24;
-    return Math.max(minBuffer, headerHeight * 0.35);
+  getEnterZoneDistance(headerHeight) {
+    return Math.max(ENTER_ZONE_MIN, headerHeight * ENTER_ZONE_FACTOR);
   }
 
-  getExitBuffer(headerHeight) {
-    const minBuffer = 48;
-    return Math.max(minBuffer, headerHeight * 0.85);
+  getExitZoneDistance(headerHeight) {
+    return Math.max(EXIT_ZONE_MIN, headerHeight * EXIT_ZONE_FACTOR);
   }
 
   scheduleMeasure() {
@@ -382,8 +387,9 @@ class CondensedHeaderController {
     const headerBottom = headerRect.bottom;
     const pillTop = pillRect.top;
     const delta = pillTop - headerBottom;
-    const enterBuffer = this.getEnterBuffer(headerRect.height || 0);
-    const exitBuffer = this.getExitBuffer(headerRect.height || 0);
+    const distance = Math.abs(delta);
+    const enterZone = this.getEnterZoneDistance(headerRect.height || 0);
+    const exitZone = this.getExitZoneDistance(headerRect.height || 0);
 
     const metrics = {
       scrollY: window.scrollY,
@@ -393,11 +399,12 @@ class CondensedHeaderController {
       headerBottom,
       pillTop,
       delta,
-      enterBuffer,
-      exitBuffer
+      distance,
+      enterZone,
+      exitZone
     };
 
-    this.currentBuffers = { enter: enterBuffer, exit: exitBuffer };
+    this.currentZoneBounds = { enter: enterZone, exit: exitZone };
 
     const mediaMatches = this.mediaQuery ? this.mediaQuery.matches : true;
     let reason = '';
@@ -423,12 +430,12 @@ class CondensedHeaderController {
     }
 
     if (!this.isCondensed) {
-      if (this.scrollDirection === 'up' && delta <= -enterBuffer) {
-        reason = `enter (Δ ${Math.round(delta)} <= -${Math.round(enterBuffer)})`;
+      if (distance <= enterZone) {
+        reason = `enter (|Δ| ${Math.round(distance)} <= ${Math.round(enterZone)})`;
         this.setCondensed(true, reason, metrics);
       }
-    } else if (this.scrollDirection === 'down' && delta >= exitBuffer) {
-      reason = `exit (Δ ${Math.round(delta)} >= ${Math.round(exitBuffer)})`;
+    } else if (distance > exitZone) {
+      reason = `exit (|Δ| ${Math.round(distance)} > ${Math.round(exitZone)})`;
       this.setCondensed(false, reason, metrics);
     }
 
@@ -486,8 +493,11 @@ class CondensedHeaderController {
     if (fields.delta) {
       fields.delta.textContent = `${Math.round(metrics.delta)}`;
     }
-    if (fields.buffers) {
-      fields.buffers.textContent = `${Math.round(metrics.enterBuffer)} / ${Math.round(metrics.exitBuffer)}`;
+    if (fields.distance) {
+      fields.distance.textContent = `${Math.round(metrics.distance)}`;
+    }
+    if (fields.zones) {
+      fields.zones.textContent = `${Math.round(metrics.enterZone)} / ${Math.round(metrics.exitZone)}`;
     }
     if (fields.state) {
       fields.state.textContent = state;
@@ -540,12 +550,13 @@ class CondensedHeaderController {
         headerBottom: Math.round(metrics.headerBottom),
         pillTop: Math.round(metrics.pillTop),
         delta: Math.round(metrics.delta),
-        enterBuffer: Math.round(metrics.enterBuffer),
-        exitBuffer: Math.round(metrics.exitBuffer)
+        distance: Math.round(metrics.distance),
+        enterZone: Math.round(metrics.enterZone),
+        exitZone: Math.round(metrics.exitZone)
       });
     }
-    if (this.currentBuffers) {
-      console.log('buffers', this.currentBuffers);
+    if (this.currentZoneBounds) {
+      console.log('zones', this.currentZoneBounds);
     }
     console.groupEnd();
   }
