@@ -455,15 +455,27 @@ main section {
 .audience-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 0;
   padding: 8px 16px;
   border-radius: 999px;
   background: rgba(124, 141, 255, 0.12);
   color: #4f5a9f;
-  font-size: 13px;
+  font-size: clamp(11px, 1.85vw, 13px);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  width: min(100%, 420px);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.audience-pill__token {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .waitlist-form {
